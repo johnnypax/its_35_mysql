@@ -1,0 +1,13 @@
+-- DROP DATABASE IF EXISTS lez02_anagrafe;
+CREATE DATABASE lez02_anagrafe;
+USE lez02_anagrafe;
+
+-- DROP TABLE IF EXISTS Persona;
+CREATE TABLE Persona(
+	nome VARCHAR(250) NOT NULL,
+    cognome VARCHAR(250) NOT NULL,
+    cod_fis VARCHAR(16) NOT NULL UNIQUE,
+    telefono VARCHAR(50)
+);
+
+ALTER TABLE Persona ADD COLUMN  email VARCHAR(250) NOT NULL;
