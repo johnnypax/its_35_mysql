@@ -39,4 +39,27 @@ INSERT INTO Carta(codice, negozio, personaRIF) VALUES
 SELECT * FROM Persona;
 SELECT * FROM Carta;
 
-DELETE FROM Persona WHERE email = "gio@pac.it";
+-- DELETE FROM Persona WHERE email = "gio@pac.it";
+
+-- Voglio vedere tutte le carte tutte persone
+SELECT *  
+	FROM Persona 
+    JOIN Carta ON Persona.personaID = Carta.personaRIF;
+    -- WHERE nome = "Giovanni" AND cognome = "Pace"
+    
+-- Visualizza tutte le persone con le relative carte e le persone che non ne hanno
+SELECT *  
+	FROM Persona 
+    LEFT JOIN Carta ON Persona.personaID = Carta.personaRIF;
+    
+SELECT nome, cognome, email, codice, negozio
+	FROM Persona 
+    LEFT JOIN Carta ON Persona.personaID = Carta.personaRIF;
+    
+SELECT *
+	FROM Carta
+    JOIN Persona ON Carta.personaRIF = Persona.personaID;
+    
+    
+    
+    
