@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS lez02_anagrafe;
+DROP DATABASE IF EXISTS lez02_anagrafe;
 CREATE DATABASE lez02_anagrafe;
 USE lez02_anagrafe;
 
@@ -29,8 +29,10 @@ VALUES
 ('Elena', 'Blu', 'BLU278949J', '0987654321'),
 ('Giorgio', 'Neri', 'NER976543K', '9876543210');
 
-DELETE FROM Persona WHERE cod_fis = 'NER976543K';
-UPDATE Persona SET nome = "Elenuccia", cognome = "Bluetti" WHERE cod_fis = "BLU278949J";
+-- SET SESSION sql_safe_updates = 0;
+-- SET SESSION sql_safe_deletes = 0;
+-- DELETE FROM Persona WHERE cod_fis = 'NER976543K';
+-- UPDATE Persona SET nome = "Elenuccia", cognome = "Bluetti" WHERE cod_fis = "BLU278949J";
 
 -- QL
 SELECT * FROM Persona;
