@@ -28,3 +28,9 @@ VALUES
 ('Lorenzo', 'Grigi', 'GRD549834I', '1234567890'),
 ('Elena', 'Blu', 'BLU278949J', '0987654321'),
 ('Giorgio', 'Neri', 'NER976543K', '9876543210');
+
+DELETE FROM Persona WHERE cod_fis = 'NER976543K';
+UPDATE Persona SET nome = "Elenuccia", cognome = "Bluetti" WHERE cod_fis = "BLU278949J";
+
+-- QL
+SELECT * FROM Persona;
