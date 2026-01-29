@@ -36,3 +36,6 @@ VALUES
 
 -- QL
 SELECT * FROM Persona;
+
+SELECT cod_fis AS "Codice Fiscale", telefono, nome, cognome FROM Persona;
+
