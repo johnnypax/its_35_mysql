@@ -35,6 +35,17 @@ INSERT INTO Libro (nome, autore, genere, isbn, codice, libreriaRIF) VALUES
 ('Matematica per Tutti', 'Luca Serra', 'Didattica', '9788800010019', 'LC009', 1),
 ('Il Codice Perduto', 'Davide Riva', 'Avventura', '9788800010020', 'LC010', 1);
 
+
+
+
+
+
+
+
+
+
+
+
 SELECT * 
 	FROM Libreria
     JOIN Libro ON Libreria.libreriaID = Libro.libreriaRIF
