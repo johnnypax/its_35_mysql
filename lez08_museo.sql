@@ -154,8 +154,20 @@ INSERT INTO Personaggio_Scultura (personaggioRIF, sculturaRIF) VALUES
 (6, 8),
 (1, 7);
 
+-- Tutti gli artisti presenti nel Museo degli uffizi
+SELECT titolo, Artista.nome
+	FROM Museo
+    JOIN Dipinto ON Museo.museoID = Dipinto.museoRIF
+    JOIN Artista ON Dipinto.artistaRIF = Artista.artistaID
+    WHERE Museo.nome = "Museo degli Uffizi";
 
-
+-- Tutti i musei dove trovo il personaggio San Pietro
+SELECT * 
+	FROM Personaggio 
+    JOIN Personaggio_Dipinto ON Personaggio.personaggioID = Personaggio_Dipinto.personaggioRIF
+    JOIN Dipinto ON Personaggio_Dipinto.dipintoRIF = Dipinto.dipintoID
+    JOIN Museo ON Dipinto.museoRIF = Museo.museoID
+    WHERE Personaggio.nome = "San Pietro";
 
 
 
