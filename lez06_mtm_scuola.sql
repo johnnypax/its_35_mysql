@@ -40,4 +40,51 @@ INSERT INTO Studente_Esame(studenteRIF, esameRIF) VALUES
 (2,1),
 (2,4);
 
+SELECT * FROM Studente;
+SELECT * FROM Esame;
+SELECT * FROM Studente_Esame;
 
+SELECT * 
+	FROM Studente
+    JOIN Studente_Esame ON Studente.studenteID = Studente_Esame.studenteRIF
+    JOIN Esame ON Studente_Esame.esameRIF = Esame.esameID
+    WHERE matricola = "AB12345";
+
+-- Visualizza tutti gli studenti iscritti ad esami e quelli non iscritti
+SELECT * 
+	FROM Studente
+    LEFT JOIN Studente_Esame ON Studente.studenteID = Studente_Esame.studenteRIF
+    LEFT JOIN Esame ON Studente_Esame.esameRIF = Esame.esameID;
+    
+-- Visualizza tutti gli esami che hanno iscritti e quelli che non ne hanno
+SELECT * 
+	FROM Studente
+    RIGHT JOIN Studente_Esame ON Studente.studenteID = Studente_Esame.studenteRIF
+    RIGHT JOIN Esame ON Studente_Esame.esameRIF = Esame.esameID;
+    
+
+
+-- Voglio tutti gli esami con studenti iscritti
+SELECT * 
+	FROM Esame
+    JOIN Studente_Esame ON Esame.esameID = Studente_Esame.esameRIF
+    JOIN Studente ON Studente_Esame.studenteRIF = Studente.studenteID;
+    
+-- Voglio tutti gli esami con studenti iscritti e senza iscritti
+SELECT * 
+	FROM Esame
+    LEFT JOIN Studente_Esame ON Esame.esameID = Studente_Esame.esameRIF
+    LEFT JOIN Studente ON Studente_Esame.studenteRIF = Studente.studenteID;
+    
+SELECT * 
+	FROM Esame
+    LEFT JOIN Studente_Esame ON Esame.esameID = Studente_Esame.esameRIF
+    LEFT JOIN Studente ON Studente_Esame.studenteRIF = Studente.studenteID
+UNION
+SELECT * 
+	FROM Esame
+    RIGHT JOIN Studente_Esame ON Esame.esameID = Studente_Esame.esameRIF
+    RIGHT JOIN Studente ON Studente_Esame.studenteRIF = Studente.studenteID;
+
+
+    
