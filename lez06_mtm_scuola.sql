@@ -1,0 +1,16 @@
+CREATE DATABASE lez06_mtm_scuola;
+USE lez06_mtm_scuola;
+
+CREATE TABLE Studente(
+	studenteID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    cognome VARCHAR(255) NOT NULL,
+    matricola VARCHAR(255) NOT NULL UNIQUE    
+);
+
+CREATE TABLE Esame(
+	esameID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    data_esame DATE NOT NULL
+);
+

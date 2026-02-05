@@ -61,5 +61,21 @@ SELECT *
     JOIN Persona ON Carta.personaRIF = Persona.personaID;
     
     
+SELECT * 
+	FROM Persona
+    JOIN Carta ON Persona.personaID = Carta.personaRIF
+    WHERE email = "gio@pac.it";
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
