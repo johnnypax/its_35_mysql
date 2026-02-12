@@ -141,6 +141,8 @@ INSERT INTO Visita (data_visita, note, medicoRIF, pazienteRIF, ricoveroRIF) VALU
 ("2024-09-21 15:00:00", "Follow-up chirurgico", 9, 9, 9),
 ("2024-10-27 09:40:00", "Esame oculistico", 10, 10, 10);
 
+
+-- Tutti i pazienti di un reparto
 SELECT * 
 	FROM Reparto
     JOIN Ricovero ON Reparto.repartoID = Ricovero.repartoRIF
@@ -158,7 +160,20 @@ CREATE VIEW dettaglio_ricoveri AS
 		JOIN Ricovero ON Reparto.repartoID = Ricovero.repartoRIF
 		JOIN Paziente ON Ricovero.pazienteRIF = Paziente.pazienteID;
 
+DROP VIEW dettaglio_ricoveri;
+
 SELECT * 
 	FROM dettaglio_ricoveri 
     WHERE reparto IN("Pediatria", "Neurologia") AND data_uscita IS NOT NULL;
 
+-- Tutti i pazienti visitati da uno specifico medico
+CREATE VIEW dati_visite AS
+	SELECT 	nominativo AS "medico", 
+			data_visita, 
+			note, 
+			CONCAT(nome, " ",cognome) AS Paziente
+		FROM Medico
+		JOIN Visita ON Medico.medicoID = Visita.medicoRIF
+		JOIN Paziente ON Visita.pazienteRIF = Paziente.pazienteID;
+
+SELECT * FROM dati_visite;
