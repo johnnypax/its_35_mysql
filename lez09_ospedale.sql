@@ -141,4 +141,24 @@ INSERT INTO Visita (data_visita, note, medicoRIF, pazienteRIF, ricoveroRIF) VALU
 ("2024-09-21 15:00:00", "Follow-up chirurgico", 9, 9, 9),
 ("2024-10-27 09:40:00", "Esame oculistico", 10, 10, 10);
 
+SELECT * 
+	FROM Reparto
+    JOIN Ricovero ON Reparto.repartoID = Ricovero.repartoRIF
+    JOIN Paziente ON Ricovero.pazienteRIF = Paziente.pazienteID;
+    
+-- 
+SELECT Reparto.nome AS "reparto", Paziente.nome, cognome, cod_fis, data_ricovero, data_uscita
+	FROM Reparto
+    JOIN Ricovero ON Reparto.repartoID = Ricovero.repartoRIF
+    JOIN Paziente ON Ricovero.pazienteRIF = Paziente.pazienteID;
+    
+CREATE VIEW dettaglio_ricoveri AS
+	SELECT Reparto.nome AS "reparto", Paziente.nome, cognome, cod_fis, data_ricovero, data_uscita
+		FROM Reparto
+		JOIN Ricovero ON Reparto.repartoID = Ricovero.repartoRIF
+		JOIN Paziente ON Ricovero.pazienteRIF = Paziente.pazienteID;
+
+SELECT * 
+	FROM dettaglio_ricoveri 
+    WHERE reparto IN("Pediatria", "Neurologia") AND data_uscita IS NOT NULL;
 
