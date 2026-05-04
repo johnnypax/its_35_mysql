@@ -67,3 +67,21 @@ app.put("/studenti/:id", async (req, res) => {
         res.status(404).json({ message: "Studente non trovato" });
     }
 });
+
+app.get("/corso", async (req, res) => {
+    const db = await mongoose.connect('mongodb://localhost:27017/its');
+    let elenco = await Corso.find({})
+    db.disconnect();
+    res.json(elenco);
+});
+
+app.post("/corso", async (req, res) => {
+    if (req.body.nome === undefined || req.body.descrizione === undefined || req.body.crediti === undefined) {
+        return res.status(400).json({ message: "Dati mancanti" });
+    }
+    const db = await mongoose.connect('mongodb://localhost:27017/its');
+    const corso = new Corso(req.body);
+    await corso.save();
+    db.disconnect();
+    res.json(corso);
+});
