@@ -88,3 +88,15 @@ app.post("/corso", async (req, res) => {
     db.disconnect();
     res.json(corso);
 });
+
+app.get("/studenti/:id/corso", async (req, res) => {
+    try {
+        const db = await mongoose.connect(DB);
+        const id = req.params.id;
+        let studente = await Studente.findById(id).populate('corso');
+        db.disconnect();
+        res.json(studente);
+    } catch (error) {
+        res.status(404).json({ message: "Studente non trovato" });
+    }   
+});
