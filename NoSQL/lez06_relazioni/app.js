@@ -1,9 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Studente = require('./models/Studente')
+const Corso = require('./models/Corso')
+require('dotenv').config();
 
-const PORTA = 4000;
-const INDIRIZZO = 'localhost';
+const PORTA = process.env.PORTA || 4000;
+const INDIRIZZO = process.env.INDIRIZZO || "localhost";
+const DB = process.env.DB;
 
 const app = express();
 app.use(express.json());
@@ -13,7 +16,7 @@ app.listen(PORTA, INDIRIZZO, () => {
 });
 
 app.get("/studenti/", async (req, res) => {
-    const db = await mongoose.connect('mongodb://localhost:27017/its');
+    const db = await mongoose.connect(DB);
     let elenco = await Studente.find({})
     db.disconnect();
     res.json(elenco);
@@ -21,7 +24,7 @@ app.get("/studenti/", async (req, res) => {
 
 app.get("/studenti/:id", async (req, res) => {
     try {
-        const db = await mongoose.connect('mongodb://localhost:27017/its');
+        const db = await mongoose.connect(DB);
         const id = req.params.id;
         let studente = await Studente.findById(id);
         db.disconnect();
@@ -36,7 +39,7 @@ app.post("/studenti/", async (req, res) => {
         return res.status(400).json({ message: "Dati mancanti" });
     }
 
-    const db = await mongoose.connect('mongodb://localhost:27017/its');
+    const db = await mongoose.connect(DB);
     const studente = new Studente(req.body);
     await studente.save();
     db.disconnect();
@@ -45,7 +48,7 @@ app.post("/studenti/", async (req, res) => {
 
 app.delete("/studenti/:id", async (req, res) => {
     try {
-        const db = await mongoose.connect('mongodb://localhost:27017/its');
+        const db = await mongoose.connect(DB);
         const id = req.params.id;
         await Studente.findByIdAndDelete(id);
         db.disconnect();
@@ -57,7 +60,7 @@ app.delete("/studenti/:id", async (req, res) => {
 
 app.put("/studenti/:id", async (req, res) => {
     try {
-        const db = await mongoose.connect('mongodb://localhost:27017/its');
+        const db = await mongoose.connect(DB);
         const id = req.params.id;
         const studenteAggiornato =
             await Studente.findByIdAndUpdate(id, req.body, { new: true });
@@ -69,7 +72,7 @@ app.put("/studenti/:id", async (req, res) => {
 });
 
 app.get("/corso", async (req, res) => {
-    const db = await mongoose.connect('mongodb://localhost:27017/its');
+    const db = await mongoose.connect(DB);
     let elenco = await Corso.find({})
     db.disconnect();
     res.json(elenco);
@@ -79,7 +82,7 @@ app.post("/corso", async (req, res) => {
     if (req.body.nome === undefined || req.body.descrizione === undefined || req.body.crediti === undefined) {
         return res.status(400).json({ message: "Dati mancanti" });
     }
-    const db = await mongoose.connect('mongodb://localhost:27017/its');
+    const db = await mongoose.connect(DB);
     const corso = new Corso(req.body);
     await corso.save();
     db.disconnect();
